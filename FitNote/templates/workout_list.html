@@ -1,0 +1,45 @@
+{% extends "master_template.html" %}
+
+{% block title %}
+    FitNotes
+{% endblock title %}
+
+{% block content %}
+    <div class="greyborder d-flex flex-column mx-auto col-xl-6 px-1">
+        <div class="mt-1 text-center">
+            <h1 class="display-4 mark">FitNotes</h1>
+        </div>
+        <div class="mt-3">
+            <table class="table table-borderless table-striped">
+                <tbody>
+                    {% for workout in workouts %}
+                    <tr>
+                        <td class="col-6">
+                            <a href="{% url 'workout_detail' pk=workout.id %}" class="browntext mx-4">{{ workout.title }}</a>
+                        </td>
+                        <td>
+                            <div class="dropdown"></div>
+                                <button class="btn btn-success float-end mx-4" data-bs-toggle="dropdown"></button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <span class="dropdown-item">
+                                            <a href="{% url 'workout_delete' pk=workout.id %}" class="browntext">Delete</a>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <div class="text-center">
+                        <p>No Workouts</p>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{% url 'workout_create' %}" class="white_text_button bg-success my-1 py-2 text-center rounded">Create Workout</a>
+    </div>
+    
+{% endblock content %}
+        
